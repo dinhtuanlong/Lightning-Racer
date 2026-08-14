@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+guid: d4a05f7a77b412e4ea78d0fb4d866cd7
+AssetOrigin:
+  serializedVersion: 1
+  productId: 214104
+  packageName: 'Casual Game Music: Happy, Bouncy, Social'
+  packageVersion: 1.0
+  assetPath: Assets/Imported/Audio/Happy, Bouncy, Social/Cotton Candy_124 BPM.wav
+  uploadId: 482070
+AudioImporter:
+  externalObjects: {}
+  serializedVersion: 8
+  defaultSettings:
+    serializedVersion: 2
+    loadType: 0
+    sampleRateSetting: 0
+    sampleRateOverride: 44100
+    compressionFormat: 1
+    quality: 0.79999995
+    conversionMode: 0
+    preloadAudioData: 1
+  platformSettingOverrides: {}
+  forceToMono: 0
+  normalize: 1
+  loadInBackground: 0
+  ambisonic: 0
+  3D: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

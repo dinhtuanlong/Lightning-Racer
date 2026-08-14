@@ -105,6 +105,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c274434c96ba5254a83fe6245594ba52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Platform
+  diamondPrefab: {fileID: 6901586006690522284, guid: 6d9b613cd71054746a3f1dc642eed80e, type: 3}
+  diamondSpawnChance: 0.2
+  spawnDistanceMin: -0.8
+  spawnDistanceMax: 0.8
 --- !u!65 &26731831664443485
 BoxCollider:
   m_ObjectHideFlags: 0
