@@ -13,12 +13,14 @@ public class GameManager : MonoBehaviour
     public GameObject gameplayUI;
     public GameObject menuUI;
     public AudioClip[] gameMusic;
-    bool gameOver = false;
+    public bool gameOver = false;
     int score = 0;
     int highScore = 0;
+    int adsCount = 0;
     Coroutine scoreCoroutine;
     AudioSource audioSource;
     string HIGH_SCORE_STRING = "HighScore";
+    string ADS_COUNT_STRING = "AdsCount";
 
     void Awake()
     {
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         highScore = PlayerPrefs.GetInt(HIGH_SCORE_STRING);
         bestScoreText.text = "Best score: " + highScore;
+        CheckAdCount();
     }
 
     void Update()
@@ -57,6 +60,7 @@ public class GameManager : MonoBehaviour
         menuUI.SetActive(false);
         audioSource.clip = gameMusic[1];
         audioSource.Play();
+        AdsManager.instance.ShowBannerAd();
     }
 
     public void GameOver()
@@ -66,10 +70,25 @@ public class GameManager : MonoBehaviour
         platformSpawner.SetActive(false);
         SaveHighScore();
         StopCoroutine(scoreCoroutine);
-        Invoke("ReloadLevel", 2f);
+        # if UNITY_ANDROID
+        if (adsCount >= 2)
+        {
+            adsCount = 0;
+            PlayerPrefs.SetInt(ADS_COUNT_STRING, adsCount);
+            Invoke("ShowAds", 2f);
+        } else
+        {
+            Invoke("ReloadLevel", 2f);
+        }
+        # endif
     }
 
-    void ReloadLevel()
+    void ShowAds()
+    {
+        AdsManager.instance.ShowRewaredAds();
+    }
+
+    public void ReloadLevel()
     {
         SceneManager.LoadScene("Game");
     }
@@ -104,6 +123,19 @@ public class GameManager : MonoBehaviour
         {
             // Playing the first time
             PlayerPrefs.SetInt(HIGH_SCORE_STRING, score);
+        }
+    }
+
+    void CheckAdCount()
+    {
+        if (PlayerPrefs.HasKey(ADS_COUNT_STRING))
+        {
+            adsCount = PlayerPrefs.GetInt(ADS_COUNT_STRING);
+            adsCount++;
+            PlayerPrefs.SetInt(ADS_COUNT_STRING, adsCount);
+        } else
+        {
+            PlayerPrefs.SetInt(ADS_COUNT_STRING, 0);
         }
     }
 }

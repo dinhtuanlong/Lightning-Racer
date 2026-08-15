@@ -19,7 +19,7 @@ public class CarController : MonoBehaviour
             Move();
             CheckInput();
         }
-        if (transform.position.y <= 0)
+        if (transform.position.y <= 0 && GameManager.instance.gameOver == false)
         {
             GameManager.instance.GameOver();
         }
